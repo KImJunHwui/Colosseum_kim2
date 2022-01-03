@@ -2,6 +2,7 @@ package com.kim.colosseum_kim2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.kim.colosseum_kim2.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -23,7 +24,7 @@ class MainActivity : BaseActivity() {
 
 //            서버에 실제 회원이 맞는지 확인 요청.(Request) ??
 
-
+ServerUtil.postRequestLogin(inputEmail, inputPw)
 
         }
 
