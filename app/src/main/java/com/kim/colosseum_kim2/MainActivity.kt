@@ -1,5 +1,6 @@
 package com.kim.colosseum_kim2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -17,6 +18,12 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        signUpBtn.setOnClickListener {
+
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
+        }
 
         loginBtn.setOnClickListener {
 
@@ -48,7 +55,9 @@ ServerUtil.postRequestLogin(inputEmail, inputPw, object : ServerUtil.Companion.J
 
             val message = jsonObj.getString("message")
 
-           runOnUiThread {   Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show() }
+           runOnUiThread {   Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+
+           }
 
 
         }
