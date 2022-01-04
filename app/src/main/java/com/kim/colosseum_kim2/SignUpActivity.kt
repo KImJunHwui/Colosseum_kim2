@@ -2,6 +2,9 @@ package com.kim.colosseum_kim2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.kim.colosseum_kim2.utils.ServerUtil
+import kotlinx.android.synthetic.main.activity_sign_up.*
+import org.json.JSONObject
 
 class SignUpActivity : BaseActivity() {
 
@@ -13,7 +16,28 @@ class SignUpActivity : BaseActivity() {
     }
     override fun setupEvents() {
 
-    }
+        signUpBtn.setOnClickListener {
+
+            val inputEmail = emailEdt.text.toString()
+            val inputPw = passwordEdt.text.toString()
+            val inputNickname = nicknameEdt.text.toString()
+
+            ServerUtil.putRequestSignUp(inputEmail,inputPw,inputNickname, object : ServerUtil.Companion.JsonReponseHandler{
+                override fun onResponse(jsonObj: JSONObject) {
+
+                }
+
+
+            })
+
+
+                }
+
+
+
+        }
+
+
 
     override fun setValues() {
 
