@@ -23,7 +23,10 @@ class MainActivity : BaseActivity() {
 
             val myIntent = Intent(mContext, SignUpActivity::class.java)
             startActivity(myIntent)
+
         }
+
+
 
         loginBtn.setOnClickListener {
 
