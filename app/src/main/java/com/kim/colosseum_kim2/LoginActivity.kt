@@ -49,6 +49,11 @@ ServerUtil.postRequestLogin(inputEmail, inputPw, object : ServerUtil.Companion.J
         if(code == 200){
 
             //로그인 성공
+
+            val myIntent = Intent(mContext, MainActivity::class.java)
+            startActivity(myIntent)
+
+            finish()
         }
 
         else{
