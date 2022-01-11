@@ -3,6 +3,7 @@ package com.kim.colosseum_kim2
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import com.kim.colosseum_kim2.utils.ContextUtil
 import com.kim.colosseum_kim2.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
@@ -49,6 +50,13 @@ ServerUtil.postRequestLogin(inputEmail, inputPw, object : ServerUtil.Companion.J
         if(code == 200){
 
             //로그인 성공
+
+//                서버가 주는 토큰을 추출해서 저장해 보자
+
+            val dataObj = jsonObj.getJSONObject("data")
+            val token = dataObj.getString("token")
+
+            ContextUtil.setToken(mContext, token)
 
             val myIntent = Intent(mContext, MainActivity::class.java)
             startActivity(myIntent)
