@@ -2,12 +2,15 @@ package com.kim.colosseum_kim2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.kim.colosseum_kim2.datas.Topic
 import com.kim.colosseum_kim2.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.emailEdt
 
 class MainActivity : BaseActivity() {
+
+    val mTopicList = ArrayList<Topic>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +28,13 @@ class MainActivity : BaseActivity() {
 
     override fun setValues() {
 
+        getTopicListFromServer()
+
+    }
+
+    fun getTopicListFromServer(){
+
+//        서버에서 주제 목록을 받아오자. => /v2/main_info = ServerUtil에 기능 추가 필요.
     }
 
 }
