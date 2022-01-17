@@ -2,9 +2,11 @@ package com.kim.colosseum_kim2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.kim.colosseum_kim2.adapters.TopicAdapter
 import com.kim.colosseum_kim2.datas.Topic
 import com.kim.colosseum_kim2.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import kotlinx.android.synthetic.main.activity_sign_up.emailEdt
 import org.json.JSONObject
@@ -12,6 +14,8 @@ import org.json.JSONObject
 class MainActivity : BaseActivity() {
 
     val mTopicList = ArrayList<Topic>()
+
+    lateinit var mTopicAdapter : TopicAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +26,10 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        getTopicListFromServer()
 
+        mTopicAdapter = TopicAdapter(mContext, R.layout.topic_list_item, mTopicList)
+        topicListView.adapter = mTopicAdapter
 
 
     }
@@ -60,6 +67,14 @@ class MainActivity : BaseActivity() {
                     mTopicList.add(topicData)
 
                 }
+
+//                어댑터가 먼저 세팅 되고 => 나중에 목록이 추가. => 새로 고침 필요(UI 영향)
+
+                runOnUiThread {
+
+                    mTopicAdapter.notifyDataSetChanged()
+                }
+
 
 
 
