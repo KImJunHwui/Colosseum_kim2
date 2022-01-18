@@ -1,5 +1,6 @@
 package com.kim.colosseum_kim2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.kim.colosseum_kim2.adapters.TopicAdapter
@@ -26,10 +27,18 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
-        getTopicListFromServer()
 
-        mTopicAdapter = TopicAdapter(mContext, R.layout.topic_list_item, mTopicList)
-        topicListView.adapter = mTopicAdapter
+topicListView.setOnItemClickListener { parent, view, position, id ->
+
+    val clickedTopic = mTopicList[position]
+
+    val myIntent = Intent(mContext, ViewTopicDetailActivity::class.java)
+    myIntent.putExtra("topic", clickedTopic)
+    startActivity(myIntent)
+}
+
+
+
 
 
     }
@@ -37,6 +46,9 @@ class MainActivity : BaseActivity() {
     override fun setValues() {
 
         getTopicListFromServer()
+
+        mTopicAdapter = TopicAdapter(mContext, R.layout.topic_list_item, mTopicList)
+        topicListView.adapter = mTopicAdapter
 
     }
 
