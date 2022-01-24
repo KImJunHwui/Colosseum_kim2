@@ -247,14 +247,14 @@ class ServerUtil {
 
 //      원하는 주제 상세현황 확인 기능
 
-        fun getRequestTopicDetail(context : Context, topicID : Int, handler: JsonReponseHandler?){
+        fun getRequestTopicDetail(context : Context, topicId : Int, handler: JsonReponseHandler?){
 
 //            어디로? + 어떤 데이터? 같이 명시하자.
 //            URL 적으면 + 파라미터 첨부도 같이 => 보조 도구 ( Builder )
 
             val urlBuilder = "${BASE_URL}/topic/".toHttpUrlOrNull()!!.newBuilder()
-            urlBuilder.addEncodedPathSegment(topicID.toString())
-//            urlBuilder.addEncodedQueryParameter("type", type)
+            urlBuilder.addEncodedPathSegment(topicId.toString())
+            urlBuilder.addEncodedQueryParameter("order_type", "NEW")
 //            urlBuilder.addEncodedQueryParameter("value", value)
 
             val urlString = urlBuilder.build().toString()
