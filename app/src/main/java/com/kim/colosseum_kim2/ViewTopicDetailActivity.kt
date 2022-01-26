@@ -1,10 +1,13 @@
 package com.kim.colosseum_kim2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.kim.colosseum_kim2.adapters.ReplyAdapter
 import com.kim.colosseum_kim2.datas.Reply
+import com.kim.colosseum_kim2.datas.Side
 import com.kim.colosseum_kim2.datas.Topic
 import com.kim.colosseum_kim2.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
@@ -17,6 +20,9 @@ class ViewTopicDetailActivity : BaseActivity() {
     val mReplyList = ArrayList<Reply>()
     lateinit var mReplyAdapter: ReplyAdapter
 
+//    내가 선택한 진영이 어디인지? 초기값은 선택진영 없다.(null)
+    var mySelectedSide : Side? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_topic_detail)
@@ -25,6 +31,29 @@ class ViewTopicDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        writeReplayBtn.setOnClickListener {
+
+//            만약 선택된 진영이 없다면, 투표부터 하도록.
+
+            if(mySelectedSide == null){
+
+                Toast.makeText(mContext, "투표를 한 이후에만 의견을 등록할 수 있습니다", Toast.LENGTH_SHORT).show()
+            }
+
+            else {
+
+//                의견 작성 화면으로 이동.
+                val myIntent = Intent(mContext, EditReplyActivity::class.java)
+                myIntent.putExtra("my_side",mySelectedSide)
+                startActivity(myIntent)
+
+
+
+            }
+
+
+        }
 
         voteToFirstSideBtn.setOnClickListener {
 
@@ -89,11 +118,28 @@ class ViewTopicDetailActivity : BaseActivity() {
 
                 val replyArr = topicObj.getJSONArray("replies")
 
+//                똑같은 데이터가 계속 쌓이는 것을 막자.
+                mReplyList.clear()
+
                 for (i in 0 until replyArr.length()){
 
                     val replyObj = replyArr.getJSONObject(i)
                     val reply = Reply.getReplyFromJson(replyObj)
                     mReplyList.add(reply)
+
+                }
+
+//               내가 선택한 진영이 있다면 => 파싱해서 mySelectedSide에 담아주자
+
+//                topicObj 내부의 my_side를 추출 => null이 아닐때만 추출.
+
+                mySelectedSide = null
+
+                if(!topicObj.isNull("my_side")){
+
+                    val mySideObj = topicObj.getJSONObject("my_side")
+                    val mySide = Side.getSideFromJson(mySideObj)
+                    mySelectedSide = mySide
 
                 }
 
