@@ -101,6 +101,12 @@ class ViewTopicDetailActivity : BaseActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        getTopicDetailFromSever()
+    }
+
 
     fun getTopicDetailFromSever(){
 
