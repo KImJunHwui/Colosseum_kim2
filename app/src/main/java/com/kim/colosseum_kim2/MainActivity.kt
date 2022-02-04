@@ -3,6 +3,7 @@ package com.kim.colosseum_kim2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.kim.colosseum_kim2.adapters.TopicAdapter
 import com.kim.colosseum_kim2.datas.Topic
 import com.kim.colosseum_kim2.utils.ServerUtil
@@ -28,7 +29,7 @@ class MainActivity : BaseActivity() {
 
     override fun setupEvents() {
 
-topicListView.setOnItemClickListener { parent, view, position, id ->
+        topicListView.setOnItemClickListener { parent, view, position, id ->
 
     val clickedTopic = mTopicList[position]
 
@@ -50,6 +51,9 @@ topicListView.setOnItemClickListener { parent, view, position, id ->
         mTopicAdapter = TopicAdapter(mContext, R.layout.topic_list_item, mTopicList)
         topicListView.adapter = mTopicAdapter
 
+//        BaseActivity가 물려준 백버튼을 숨김처리
+
+        backBtn.visibility = View.GONE
     }
 
     fun getTopicListFromServer(){
