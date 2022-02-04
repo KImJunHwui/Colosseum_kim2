@@ -30,6 +30,11 @@ abstract class BaseActivity : AppCompatActivity(){
         val myToolbar = defaultActionBar.customView.parent as androidx.appcompat.widget.Toolbar
         myToolbar.setContentInsetsAbsolute(0,0)
 
+        backBtn = defaultActionBar.customView.findViewById(R.id.backBtn)
+        backBtn.setOnClickListener {
+
+            finish()
+        }
 
 
 
