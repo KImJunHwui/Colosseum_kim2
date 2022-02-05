@@ -3,7 +3,9 @@ package com.kim.colosseum_kim2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import com.google.firebase.iid.FirebaseInstanceId
 import com.kim.colosseum_kim2.adapters.TopicAdapter
 import com.kim.colosseum_kim2.datas.Topic
 import com.kim.colosseum_kim2.utils.ServerUtil
@@ -25,6 +27,9 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
         setValues()
         setupEvents()
+
+//        푸시 발송 연습용 코드 -> 기기 고유번호 확인
+        Log.d("디바이스토큰",FirebaseInstanceId.getInstance().token!!)
     }
 
     override fun setupEvents() {
